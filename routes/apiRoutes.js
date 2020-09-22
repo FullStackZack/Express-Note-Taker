@@ -6,7 +6,7 @@ module.exports = function(app) {
 
     app.get("/api/notes", function(req, res) {
 
-        res.json(db);
+        res.sendFile(db);
     });
 
     app.post("/api/notes", function(req, res){
@@ -14,13 +14,13 @@ module.exports = function(app) {
         let newNote = req.body
         newNote.id = uniqid()
 
-        return (fs.readFile((path.join(__dirname,"/db/db.json")), function (err, data){
+        return (fs.readFile((path.join(__dirname,"../Develop/db/db.json")), function (err, data){
             if (err) throw err;
 
             let notes = JSON.parse(data)
             notes.push(newNote)
 
-            fs.writeFile((path.join(__dirname,"/db/db.json")), JSON.stringify(notes), (err) => {
+            fs.writeFile((path.join(__dirname,"../Develop/db/db.json")), JSON.stringify(notes), (err) => {
                 if (err) throw err;
                 console.log("Success!")
             })
