@@ -28,12 +28,14 @@ module.exports = function(app) {
             notes.push(newNote)
 
             fs.writeFile((path.join(__dirname,"../db/db.json")), JSON.stringify(notes), (err) => {
+
                 if (err) throw err;
                 console.log("Success!")
+
             });
 
             res.send(newNote);
-
+            
         }));
     });
 
