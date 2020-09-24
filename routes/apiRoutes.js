@@ -1,6 +1,7 @@
 let db = require("../db/db.json")
 const uniqid = require('uniqid');
 const fs = require("fs");
+const path = require("path");
 
 module.exports = function(app) {
 
@@ -26,7 +27,7 @@ module.exports = function(app) {
             let notes = JSON.parse(data)
             notes.push(newNote)
 
-            fs.writeFile((path.join(__dirname,"../db/db.json")), JSON.stringify(notes), (err) => {
+            fs.writeFileSync((path.join(__dirname,"../db/db.json")), JSON.stringify(notes), (err) => {
                 if (err) throw err;
                 console.log("Success!")
             })
