@@ -7,7 +7,13 @@ module.exports = function(app) {
     app.get("/api/notes", function(req, res) {
 
         res.json(db);
+
     });
+
+    app.get("/api/notes/:id", function(req, res) {
+
+        res.json(db[Number(req.params.id)]);
+    })
 
     app.post("/api/notes", function(req, res){
 
