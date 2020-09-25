@@ -1,6 +1,6 @@
 # Express Note Taker
 
-Deployed App:
+Deployed App: https://zacks-express-note-taker.herokuapp.com/
 
 ## Description
 Express Note Taker is an application that can be used to write, save, and delete notes. This app uses an express backend and save & retrieve note data from a JSON file.
