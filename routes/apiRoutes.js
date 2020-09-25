@@ -2,15 +2,16 @@ const uniqid = require('uniqid');
 const fs = require("fs");
 const path = require("path");
 
-const db = require("../db/db.json")
-
-//let notes = [];
+//let db = require("../db/db.json")
 
 module.exports = function(app) {
 
     app.get("/api/notes", function(req, res) {
 
-        return res.json(db);
+        fs.readFile(path.join(__dirname, "../db/db.json"), "utf8", (err, data) => {
+            if (err) throw err;
+            res.json(JSON.parse(data));
+        });
 
     });
 
@@ -34,8 +35,8 @@ module.exports = function(app) {
 
             });
 
-            res.send(newNote);
-            
+            res.send();
+
         }));
     });
 
