@@ -42,8 +42,36 @@ module.exports = function(app) {
 
     app.delete("/api/notes/:id", function(req, res) {
 
-        const noteId = req.params.id;
-        console.log(noteId);
-        
+        const noteId = parseInt(req.params.id);
+
+        fs.readFile(path.join(__dirname, "../db/db.json"), function(err, data) {
+            if (err) throw err;
+            
+            const db = JSON.parse(data);
+            const updatedDB = [];
+    
+            for(let i = 0; i < db.length; i++)
+            {
+                if (i !== noteId)
+                {
+                    const newNote = {
+                        title: db[i].title,
+                        text: db[i].text,
+                        id: updatedDB.length
+                    };
+    
+                    updatedDB.push(newNote);
+                }
+            }
+            
+            fs.writeFile(path.join(__dirname, "../db/db.json"), JSON.stringify(updatedDB), function(err) {
+                if (err) throw err;
+
+                res.send(req.body);
+
+                console.log("Note Deleted!")
+            });
+            
+        });
     });
 };
